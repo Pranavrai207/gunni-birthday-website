@@ -687,7 +687,9 @@ function setupCakeBlow() {
     });
   });
 
-  micBtn.addEventListener("click", startMicrophoneBlowing);
+  if (micBtn) {
+    micBtn.addEventListener("click", startMicrophoneBlowing);
+  }
 
   function extinguishCandle(candleNode) {
     if (candleNode.classList.contains("extinguished")) return;
@@ -737,8 +739,10 @@ function setupCakeBlow() {
     unlockedCard.style.display = "block";
     
     // Change mic button description
-    micBtn.innerHTML = `<span>✨ Wishes Sent! ✨</span>`;
-    micBtn.disabled = true;
+    if (micBtn) {
+      micBtn.innerHTML = `<span>✨ Wishes Sent! ✨</span>`;
+      micBtn.disabled = true;
+    }
   }
 
   async function startMicrophoneBlowing() {
@@ -754,8 +758,10 @@ function setupCakeBlow() {
       const bufferLength = analyser.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
       
-      micBtn.innerHTML = `<span>🎙 Listening to your blow...</span>`;
-      micBtn.style.background = "var(--primary)";
+      if (micBtn) {
+        micBtn.innerHTML = `<span>🎙 Listening to your blow...</span>`;
+        micBtn.style.background = "var(--primary)";
+      }
       
       let blowCooldown = 0;
 
@@ -794,10 +800,12 @@ function setupCakeBlow() {
       checkBlow();
     } catch (err) {
       console.warn("Microphone access declined or unavailable. Falling back to click blowing.");
-      micBtn.innerHTML = `<span>⚠ Mic unavailable. Please click candles!</span>`;
-      setTimeout(() => {
-        micBtn.innerHTML = `<span>🎙 Blow candles via Mic</span>`;
-      }, 3000);
+      if (micBtn) {
+        micBtn.innerHTML = `<span>⚠ Mic unavailable. Please click candles!</span>`;
+        setTimeout(() => {
+          micBtn.innerHTML = `<span>🎙 Blow candles via Mic</span>`;
+        }, 3000);
+      }
     }
   }
 }
