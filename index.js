@@ -193,13 +193,15 @@ function toggleMusic() {
   if (musicPlaying) {
     stopMusicSequence();
     musicPlaying = false;
-    musicBtn.classList.remove("playing");
-    musicBtn.innerHTML = `
-      <svg class="music-note" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-      </svg>
-      <div style="position:absolute; width:100%; height:2px; background:currentColor; transform:rotate(-45deg);"></div>
-    `;
+    if (musicBtn) {
+      musicBtn.classList.remove("playing");
+      musicBtn.innerHTML = `
+        <svg class="music-note" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+        <div style="position:absolute; width:100%; height:2px; background:currentColor; transform:rotate(-45deg);"></div>
+      `;
+    }
     if (musicAutoStopTimeout) {
       clearTimeout(musicAutoStopTimeout);
       musicAutoStopTimeout = null;
@@ -210,12 +212,14 @@ function toggleMusic() {
     }
     startMusicSequence();
     musicPlaying = true;
-    musicBtn.classList.add("playing");
-    musicBtn.innerHTML = `
-      <svg class="music-note" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-      </svg>
-    `;
+    if (musicBtn) {
+      musicBtn.classList.add("playing");
+      musicBtn.innerHTML = `
+        <svg class="music-note" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+      `;
+    }
 
     if (musicAutoStopTimeout) {
       clearTimeout(musicAutoStopTimeout);
@@ -719,6 +723,12 @@ function setupCakeBlow() {
       blowLoop = null;
     }
     
+    // Add celebrate class to cake for burst animation
+    const cakeElement = document.querySelector(".cake");
+    if (cakeElement) {
+      cakeElement.classList.add("celebrate");
+    }
+    
     // Massive confetti burst
     const cakeRect = document.querySelector(".cake").getBoundingClientRect();
     spawnBurstConfetti(cakeRect.left + cakeRect.width / 2, cakeRect.top, 150);
@@ -965,7 +975,10 @@ document.addEventListener("DOMContentLoaded", () => {
   setupScrollNavActiveState();
   
   // Wire up main music trigger button
-  document.getElementById("music-toggle-btn").addEventListener("click", toggleMusic);
+  const musicToggleBtn = document.getElementById("music-toggle-btn");
+  if (musicToggleBtn) {
+    musicToggleBtn.addEventListener("click", toggleMusic);
+  }
 
   // Global user gesture unlocker for Web Audio API
   const unlockAudio = () => {
