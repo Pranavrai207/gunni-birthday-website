@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Gunni! 🎂💖</title>
+  <meta name="description" content="A magical, interactive birthday celebration dedicated to our sweetest cousin sister, Gunni! Explore memories, blow candles, pop bubbles, and unwrap gifts!">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Background Decorative Containers -->
+  <div class="decorations-container"></div>
+
+  <!-- Confetti Canvas Overlay -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Sparkle Trail Container -->
+  <div id="cursor-sparkles"></div>
+
+  <!-- Music Floating Controller Widget -->
+  <div class="music-widget">
+    <button id="music-toggle-btn" class="music-btn" aria-label="Toggle Birthday Music">
+      <svg class="music-note" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Celebration Gate Modal Overlay -->
+  <div id="celebration-gate">
+    <div class="gate-card">
+      <h1 class="gate-title cursive">Welcome, Princess! ✨</h1>
+      <p class="gate-subtitle">A special magic portal prepared exclusively for my lovely cousin sister. Please type your name to unlock your birthday surprise:</p>
+      
+      <div class="gate-input-wrapper">
+        <input type="text" id="gate-name-input" class="gate-input" placeholder="Gunni" value="Gunni">
+      </div>
+      
+      <button id="gate-submit-btn" class="gate-btn clickable">Unwrap the Magic ✨</button>
+    </div>
+  </div>
+
+  <!-- Floating Navigation Bar -->
+  <nav class="floating-nav">
+    <a href="#hero" class="nav-item active" title="Home" aria-label="Navigate to Home">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    </a>
+    <a href="#gallery" class="nav-item" title="Memories" aria-label="Navigate to Memories">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    </a>
+    <a href="#cake" class="nav-item" title="Cake Game" aria-label="Navigate to Cake Game">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+      </svg>
+    </a>
+    <a href="#gifts" class="nav-item" title="Gifts" aria-label="Navigate to Gifts">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+      </svg>
+    </a>
+    <a href="#wishes" class="nav-item" title="Wishes" aria-label="Navigate to Wishes">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    </a>
+    <a href="#bubble" class="nav-item" title="Bubble Pop" aria-label="Navigate to Bubble Pop">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+      </svg>
+    </a>
+  </nav>
+
+  <!-- App Main Content Container -->
+  <main>
+
+    <!-- SECTION 1: HERO -->
+    <section id="hero">
+      <div class="hero-content">
+        <h2 class="hero-cursive cursive">Happy Birthday</h2>
+        <h1 class="hero-main-title" id="greeting-recipient-name">Gunni</h1>
+        
+        <div class="glass-card hero-card">
+          <p class="hero-message">
+            To my wonderful, brilliant, and beautiful cousin sister — wishing you a year filled with sparkling laughter, endless styling, pink dreams, and giant achievements. You bring so much light and joy into our lives, and today we celebrate the amazing person you are! 💖
+          </p>
+          
+          <h3 class="cursive" style="font-size: 2.2rem; color: var(--gold-dark); margin-top: 1.5rem; animation: beat 1.2s infinite alternate; display: inline-block;">
+            🎉 The Celebration is LIVE! 🎉
+          </h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: MEMORIES WALL (GALLERY) -->
+    <section id="gallery">
+      <div class="section-title-wrapper">
+        <h2 class="section-title">Memories Wall</h2>
+        <p class="section-subtitle cursive">Every picture tells a beautiful story</p>
+      </div>
+
+      <!-- Categories filters -->
+      <div class="gallery-controls">
+        <button class="gallery-filter-btn active clickable" data-filter="all">All Memories</button>
+        <button class="gallery-filter-btn clickable" data-filter="portraits">Queen Portraits</button>
+        <button class="gallery-filter-btn clickable" data-filter="candids">Cute Candids</button>
+        <button class="gallery-filter-btn clickable" data-filter="memories">Cherished Days</button>
+      </div>
+
+      <!-- Grid Wrapper -->
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Rendered dynamically by javascript -->
+      </div>
+    </section>
+
+    <!-- SECTION 3: BIRTHDAY CAKE GAME -->
+    <section id="cake">
+      <div class="section-title-wrapper">
+        <h2 class="section-title">Blow the Candles</h2>
+        <p class="section-subtitle cursive">Make a birthday wish, Gunni</p>
+      </div>
+
+      <div class="glass-card cake-card">
+        <p class="cake-instructions">
+          It's wish-making time! Click the candle flames one by one to extinguish them, or turn on the microphone and blow directly into your microphone to blow them away!
+        </p>
+
+        <!-- Cake Stage Graphic -->
+        <div class="cake-stage">
+          <!-- Stand plate -->
+          <div class="plate"></div>
+          
+          <!-- Cake structure -->
+          <div class="cake">
+            <div class="cake-frosting">
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+              <div class="drip"></div>
+            </div>
+            
+            <!-- Candles line -->
+            <div class="candles-row">
+              <div class="candle-container clickable">
+                <div class="flame"></div>
+                <div class="smoke"></div>
+                <div class="candle"></div>
+              </div>
+              <div class="candle-container clickable">
+                <div class="flame"></div>
+                <div class="smoke"></div>
+                <div class="candle"></div>
+              </div>
+              <div class="candle-container clickable">
+                <div class="flame"></div>
+                <div class="smoke"></div>
+                <div class="candle"></div>
+              </div>
+              <div class="candle-container clickable">
+                <div class="flame"></div>
+                <div class="smoke"></div>
+                <div class="candle"></div>
+              </div>
+              <div class="candle-container clickable">
+                <div class="flame"></div>
+                <div class="smoke"></div>
+                <div class="candle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="cake-mic-btn" class="gate-btn clickable">
+          <span>🎙 Blow candles via Mic</span>
+        </button>
+
+        <!-- Unlocked wish card -->
+        <div id="cake-wish-unlocked" class="wish-unlocked-card">
+          <h4>Your wish has been sent to the stars! ✨</h4>
+          <p>May all your secret wishes, grand dreams, and small moments of happiness come true this year! We love you so much! 🎉💖</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MAGIC GIFTS -->
+    <section id="gifts">
+      <div class="section-title-wrapper">
+        <h2 class="section-title">Magic Gift Boxes</h2>
+        <p class="section-subtitle cursive">Unwrap your surprises</p>
+      </div>
+
+      <div class="gifts-grid">
+        <!-- Gift Box 1 -->
+        <div class="gift-wrapper">
+          <div class="gift-box clickable" data-gift-id="1">
+            <div class="gift-bow">
+              <div class="bow-left"></div>
+              <div class="bow-right"></div>
+            </div>
+            <div class="gift-lid"></div>
+            <div class="gift-body">
+              <div class="ribbon-v"></div>
+              <div class="ribbon-h"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gift Box 2 -->
+        <div class="gift-wrapper">
+          <div class="gift-box clickable" data-gift-id="2">
+            <div class="gift-bow">
+              <div class="bow-left"></div>
+              <div class="bow-right"></div>
+            </div>
+            <div class="gift-lid"></div>
+            <div class="gift-body">
+              <div class="ribbon-v"></div>
+              <div class="ribbon-h"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gift Box 3 -->
+        <div class="gift-wrapper">
+          <div class="gift-box clickable" data-gift-id="3">
+            <div class="gift-bow">
+              <div class="bow-left"></div>
+              <div class="bow-right"></div>
+            </div>
+            <div class="gift-lid"></div>
+            <div class="gift-body">
+              <div class="ribbon-v"></div>
+              <div class="ribbon-h"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Surprise Message Drawers (Hidden initially) -->
+      <div class="gift-drawer" id="gift-drawer-1">
+        <div class="drawer-card">
+          <img src="assets/WhatsApp Image 2026-05-29 at 12.26.10 PM.jpeg" alt="Surprise Photo 1">
+          <h4>A Beautiful Path Ahead 🌸</h4>
+          <p>“Cousins are childhood playmates who grow up to be forever friends.” On your birthday, I want to thank you for all the laughter, the gossip, and the sweet sisterly moments. Wishing you absolute success in everything you set your mind to!</p>
+        </div>
+      </div>
+
+      <div class="gift-drawer" id="gift-drawer-2">
+        <div class="drawer-card">
+          <img src="assets/WhatsApp Image 2026-05-29 at 12.26.07 PM.jpeg" alt="Surprise Photo 2">
+          <h4>Slay & Shine Always 👑</h4>
+          <p>You have a style that is uniquely yours, a heart that is incredibly kind, and a mind that is brilliantly smart. Never forget how amazing you are! Keep chasing your dreams, styling your days in shades of pink, and conquering the world!</p>
+        </div>
+      </div>
+
+      <div class="gift-drawer" id="gift-drawer-3">
+        <div class="drawer-card">
+          <img src="assets/WhatsApp Image 2026-05-29 at 11.44.43 AM (1).jpeg" alt="Surprise Photo 3">
+          <h4>Infinite Sweet Memories 💖</h4>
+          <p>Through every photo, selfie, and candid smile, we see a story of growth and joy. May the year ahead add even more colorful and spectacular chapters to your life. Happy birthday once again to the best sister in the world!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: WISHES CAROUSEL -->
+    <section id="wishes">
+      <div class="section-title-wrapper">
+        <h2 class="section-title">Wishes Carousel</h2>
+        <p class="section-subtitle cursive">Sent with love and warm hugs</p>
+      </div>
+
+      <!-- Horizontal Cards Carousel -->
+      <div class="carousel-container">
+        <div class="carousel-track" id="carousel-track">
+          <!-- Slide 1 -->
+          <div class="carousel-slide">
+            <p class="wish-quote">
+              "Happy Birthday Gunni! Wishing you all the love, happiness, and pink bubble tea in the world. You deserve the absolute best year ahead!"
+            </p>
+            <span class="wish-author">— With love, your brother</span>
+          </div>
+          
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <p class="wish-quote">
+              "To the most stylish sister ever, may your wardrobe always be full of pink, and your life full of sparkle and magic. Have a spectacular birthday!"
+            </p>
+            <span class="wish-author">— Warm wishes, family</span>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <p class="wish-quote">
+              "May this birthday bring you closer to all your big dreams. Keep shining bright, laughing loud, and staying your beautiful self!"
+            </p>
+            <span class="wish-author">— Cheers and hugs</span>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="carousel-slide">
+            <p class="wish-quote">
+              "To my lovely cousin, you are more like a sister to me. Thank you for always listening and being there. Happy Birthday!"
+            </p>
+            <span class="wish-author">— Besties forever</span>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="carousel-slide">
+            <p class="wish-quote">
+              "Sending you endless smiles, virtual cupcakes, and giant birthday hugs. Have an incredibly fun day eating all the cake you want!"
+            </p>
+            <span class="wish-author">— Happy Birthday!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel Navigation buttons -->
+      <div class="carousel-controls-row">
+        <button id="carousel-prev" class="carousel-nav-btn clickable" aria-label="Previous Wish">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:20px; height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button id="carousel-next" class="carousel-nav-btn clickable" aria-label="Next Wish">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:20px; height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION 6: BUBBLE POP GAME -->
+    <section id="bubble">
+      <div class="section-title-wrapper">
+        <h2 class="section-title">Pop-A-Bubble</h2>
+        <p class="section-subtitle cursive">Cute sensory stress buster</p>
+      </div>
+
+      <div class="glass-card bubble-game-card">
+        <p>
+          Need a quick mood boost? Pop these sweet pink bubbles to unlock tiny virtual hugs, cute emojis, and happy wishes!
+        </p>
+
+        <!-- Bubble Pop Grid -->
+        <div class="bubble-grid" id="bubble-grid">
+          <!-- Rendered dynamically by javascript -->
+        </div>
+
+        <!-- Sweet Message display board -->
+        <div class="bubble-msg-board" id="bubble-board">
+          <span>Click any bubble to start popping! 🎈</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX MODAL LAYER -->
+  <div id="lightbox-modal">
+    <button id="lightbox-close" class="lightbox-close clickable" aria-label="Close Lightbox">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:24px; height:24px;">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <button id="lightbox-prev" class="lightbox-nav prev clickable" aria-label="Previous Image">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:24px; height:24px;">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button id="lightbox-next" class="lightbox-nav next clickable" aria-label="Next Image">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:24px; height:24px;">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" class="lightbox-img" src="" alt="">
+      <div class="lightbox-caption">
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Made with <span class="footer-love">❤</span> for the best cousin sister, Gunni.</p>
+  </footer>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>
